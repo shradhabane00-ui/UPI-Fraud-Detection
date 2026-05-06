@@ -1,0 +1,11 @@
+# Backend build/runtime
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+
+# Virtual env (do NOT commit)
+.venv/
+venv/
+

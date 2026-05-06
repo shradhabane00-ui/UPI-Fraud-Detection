@@ -1,0 +1,28 @@
+# Render configuration for FraudShield backend (FastAPI)
+# Deploys the backend as a Python web service.
+
+services:
+  - type: web
+    name: fraudshield-backend
+    env: python
+    region: oregon
+    plan: free
+    runtime: "python-3.11.9"
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn -k uvicorn.workers.UvicornWorker main:app --bind 0.0.0.0:${PORT:-8000}"
+    autoDeploy: true
+    healthCheckPath: /health
+    envVars:
+      - key: MODEL_DIR
+        value: ""
+      - key: DATA_CSV
+        value: ""
+      - key: CORS_ALLOW_ORIGINS
+        value: ""
+      - key: RISK_FLAG
+        value: ""
+
+# Notes:
+# - Render expects startCommand relative to the backend folder.
+# - If Render builds from repo root, set "rootDirectory" accordingly.
+
