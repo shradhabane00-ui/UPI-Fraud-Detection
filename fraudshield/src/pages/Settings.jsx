@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import PageWrapper from "../components/PageWrapper";
+import { API_BASE_URL } from "../config";
+
 
 export default function Settings() {
 
@@ -108,15 +110,17 @@ export default function Settings() {
       alert("Fill all fields");
       return;
     }
+
     // Auto-append @fraudshield.in domain
     const userWithDomain = {
       ...newUser,
-      username: newUser.username.includes("@") 
-        ? newUser.username 
+      username: newUser.username.includes("@")
+        ? newUser.username
         : `${newUser.username}@fraudshield.in`
     };
+
     try {
-    fetch(`${API_BASE_URL}/users/add`,{
+      const res = await fetch(`${API_BASE_URL}/users/add`,{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -124,13 +128,18 @@ export default function Settings() {
         },
         body: JSON.stringify(userWithDomain)
       });
+
       const data = await res.json();
-      if (data.error) {
+      if (data?.error) {
         alert(data.error);
-      } else {
-        setUsers(data.users);
-        setNewUser({ name: "", username: "", password: "", role: "Viewer" });
+        return;
       }
+
+      // Backend returns the updated list; update UI immediately.
+      if (Array.isArray(data?.users)) {
+        setUsers(data.users);
+      }
+      setNewUser({ name: "", username: "", password: "", role: "Viewer" });
     } catch (err) {
       alert("Failed to add user");
     }

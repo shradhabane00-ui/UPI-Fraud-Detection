@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import PageWrapper from "../components/PageWrapper";
+import { API_BASE_URL } from "../config";
+
 
 export default function MLInsights() {
 

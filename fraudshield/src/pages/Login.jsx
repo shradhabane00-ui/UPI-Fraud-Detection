@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../config";
+
 
 export default function Login() {
 
@@ -12,10 +14,12 @@ export default function Login() {
   const handleLogin = async () => {
     if (!emailPrefix || !password) return alert("Enter credentials");
 
-    // Auto-append domain
-    const fullEmail = emailPrefix.includes("@") 
-      ? emailPrefix 
-      : `${emailPrefix}@fraudshield.in`;
+    const fullEmail = emailPrefix.trim().includes("@")
+      ? emailPrefix.trim()
+      : `${emailPrefix.trim()}@fraudshield.in`;
+
+
+
 
     try {
       const res = await fetch(`${API_BASE_URL}/login`,{

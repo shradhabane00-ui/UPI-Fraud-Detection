@@ -5,7 +5,7 @@ import { lazy, Suspense } from "react";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 /* LAZY LOAD */
-const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Dashboard = lazy(() => import("./pages/dashboard"));
 const Transactions = lazy(() => import("./pages/Transactions"));
 const Alerts = lazy(() => import("./pages/Alerts"));
 const MLInsights = lazy(() => import("./pages/MLInsights"));

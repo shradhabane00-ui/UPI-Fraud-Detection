@@ -1,4 +1,6 @@
 import { useMemo, useEffect, useState } from "react";
+import { API_BASE_URL } from "../config";
+
 import Sidebar from "../components/Sidebar";
 import PageWrapper from "../components/PageWrapper";
 import { motion } from "framer-motion";

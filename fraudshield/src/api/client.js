@@ -1,11 +1,11 @@
-// Centralized API client base URL.
-// Local default keeps current behavior: http://127.0.0.1:8000
+import { API_BASE_URL } from "../config";
 
-const defaultBase = 'http://127.0.0.1:8000';
-
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || defaultBase;
+// Backward-compatible export for any existing imports from ../api/client
+export { API_BASE_URL };
 
 export function apiUrl(path) {
+
+
   // Ensure single slash join.
   const base = API_BASE_URL.replace(/\/+$/, '');
   const p = String(path).replace(/^\/+/, '');
